@@ -16,14 +16,18 @@ class SignUp extends React.Component {
     this.updateCourses = this.updateCourses.bind(this);
   }
 
+  setRedirectAction(action) {
+    this.setState({ action });
+  }
+
   validateProps(props) {
     //TODO call to fb graph check email/name/connected
   }
 
   renderRedirect() {
-    const { redirectAction, result } = this.state;
+    const { action } = this.state;
 
-    if (redirectAction === 'UPDATE_COURSES' && result) {
+    if (action === 'UPDATE_COURSES') {
       return <Redirect to={{
         pathname: '/homepage',
         state: { userId: '123', sessionToken: 'TODO'}
@@ -40,8 +44,8 @@ class SignUp extends React.Component {
     } = this.state;
 
     updateCoursesAPI({courses, accessToken, userID, sessionId})
-      .then(function(result) {
-        console.log(result);
+      .then(result => {
+        this.setRedirectAction(result);
       });
 
   }

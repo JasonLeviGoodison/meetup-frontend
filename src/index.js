@@ -5,12 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import SignUp from './components/SignUp.js';
+import Homepage from './components/Homepage.js';
 
 const routing = (
     <Router>
       <div>
         <Route exact path="/" component={App} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/homepage" component={Homepage} />
       </div>
     </Router>
   )

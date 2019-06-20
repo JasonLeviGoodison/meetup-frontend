@@ -23,7 +23,7 @@ export default class Facebook extends Component {
     }
 
     if (response.email && response.name) {
-      // make the backend request to save and log the user in
+      //TODO make the backend request to save and log the user in
       logIn(response).then(action => {
         this.setRedirectAction(action);
       });

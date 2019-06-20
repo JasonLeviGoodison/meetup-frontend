@@ -14,17 +14,26 @@ class Homepage extends React.Component {
 
       var coursesDomElem = [];
       for (var i = 0; i < courses.length; i++) {
-          coursesDomElem.push(<li key={i}> {courses[i]} </li>)
+          coursesDomElem.push(<div key={i} style={{margin: "20px 20px 20px 0px"}}> 
+                {courses[i]} 
+            </div>)
       }
       return coursesDomElem;
    }
   
   render() {
     return (
+      <div class="" style={{
+          paddingLeft: 10,
+          border: "3px solid #ccc",
+          borderRadius: 16
+      }}>
       <div>
-        <ul>
+        <h1> Chats </h1>
+        <div >
             {this.renderChats()}
-        </ul>
+        </div>
+      </div>
       </div>
     )
   }

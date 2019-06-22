@@ -5,13 +5,17 @@ import { Redirect } from 'react-router-dom'
 
 export default class Facebook extends Component {
   state = {
-    redirectAction: ''
+    redirectAction: '',
+    email: ''
   }
 
   setRedirectAction = (action) => {
     this.setState({
       action: 'SIGNED_UP'
     })
+  }
+  setEmail = (email) => {
+    this.setState({email});
   }
 
   componentClicked = () => console.log('Clicked');
@@ -24,6 +28,7 @@ export default class Facebook extends Component {
 
     if (response.email && response.name) {
       //TODO make the backend request to save and log the user in
+      this.setEmail(response.email);
       logIn(response).then(action => {
         this.setRedirectAction(action);
       });
@@ -32,12 +37,12 @@ export default class Facebook extends Component {
 
 
   renderRedirect = () => {
-    const { action = '' } = this.state;
+    const { action = '', email } = this.state;
 
     if (action === 'SIGNED_UP') {
       return <Redirect to={{
         pathname: '/signup',
-        state: { userId: '123', sessionToken: 'TODO'}
+        state: { userId: '123', sessionToken: 'TODO', email}
       }} />
     } else if (action === 'LOGGED_IN') {
       return <Redirect to='/homepage' />

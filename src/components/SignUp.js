@@ -7,8 +7,8 @@ class SignUp extends React.Component {
     redirectAction: '',
     result: false,
     courses: ['CS137', 'CS129', 'CS489'],
-    userID: '123',
-    sessionId: ''
+    userID: '',
+    email: ''
   }
 
   constructor(props) {
@@ -25,25 +25,25 @@ class SignUp extends React.Component {
   }
 
   renderRedirect() {
-    const { action } = this.state;
+    const { action, email } = this.state;
 
     if (action === 'UPDATE_COURSES') {
       return <Redirect to={{
         pathname: '/homepage',
-        state: { userId: '123', sessionToken: 'TODO'}
+        state: { userId: '123', sessionToken: 'TODO', email}
       }} />
     }
   }
 
   updateCourses() {
-    const {
-      courses = [],
+    let {
+      courses,
       accessToken,
       userID,
-      sessionId = '' 
+      sessionId = '',
     } = this.state;
-
-    updateCoursesAPI({courses, accessToken, userID, sessionId})
+    let email = this.props.location.state.email;
+    updateCoursesAPI({courses, accessToken, userID, sessionId, email})
       .then(result => {
         this.setRedirectAction(result);
       });
